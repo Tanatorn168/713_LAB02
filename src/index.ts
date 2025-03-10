@@ -11,8 +11,15 @@
 // }
 
 //Task 3
-const add = (a:number,b:number) : string => {
-    return a+b;
+const add = (a:number,b:number):string => {
+    const result =  a+b;
+    return result.toString();
+ }
+    console.log(add(1,2));
+ //findMaX Function
+const findMax = (numbers: number[]): string => {
+    const maxNumber = Math.max(...numbers);
+    return maxNumber.toString();
 }
-const result = add(1,2) + 0;
-console.log(result, 'type of result: ', typeof result);
+const numbers = [1, 2, 3, 4, 5];
+console.log(findMax(numbers));
