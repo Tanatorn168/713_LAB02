@@ -1,6 +1,6 @@
 //console.log("Hello, TypeScript with Node.js!");
 let x:number | string = 10;
-x = 'hello';
+x = 10;
 
 if (typeof x === 'string') {
     console.log('x is a string');
