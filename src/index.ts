@@ -11,7 +11,7 @@
 // }
 
 //Task 3
-const add = (a:number,b:number) => {
+const add = (a:number,b:number) : string => {
     return a+b;
 }
 const result = add(1,2) + 0;
