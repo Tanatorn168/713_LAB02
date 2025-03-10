@@ -11,13 +11,13 @@
 // }
 
 //Task 3
-import { add } from './function';
+//import { add } from './function';
 //const result = add(1,2) + 0;
 
 
 //console.log(result, 'type of result:', typeof result);
 
-import {substract} from'./function';
+import add, {substract} from'./function';
 const result = add(1, 2) + 0;
 const result2 = substract(1,2) + 0;
 console.log(result, 'type of result:', typeof result);
