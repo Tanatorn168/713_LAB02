@@ -28,15 +28,95 @@ interface Event {
 const events: Event[] = [
     {
         id: 1,
-        category: "Music",
-        title: "Concert",
-        description: "A live concert",
-        location: "London",
-        date: "2021-07-01",
-        time: "19:00",
+        category: 'Music',
+        title: 'Music Festival',
+        description: 'Music festival with live bands',
+        location: 'Central Park',
+        date: '2022-02-01',
+        time: '12:00',
         petsAllowed: false,
-        organizer: "Live Nation",
+        organizer: 'Live Nation'
     },
-    // add more 5 objects
-]
+    {
+        id: 2,
+        category: 'Sport',
+        title: 'Football Match',
+        description: 'Football match between two teams',
+        location: 'Stadium',
+        date: '2022-02-02',
+        time: '15:00',
+        petsAllowed: false,
+        organizer: 'FIFA'
+    },
+    {
+        id: 3,
+        category: 'Food',
+        title: 'Food Festival',
+        description: 'Food festival with various food stalls',
+        location: 'Central Park',
+        date: '2022-02-03',
+        time: '12:00',
+        petsAllowed: true,
+        organizer: 'Food Network'
+    },
+    {
+        id: 4,
+        category: 'Art',
+        title: 'Art Exhibition',
+        description: 'Exhibition of modern art',
+        location: 'Art Gallery',
+        date: '2022-02-04',
+        time: '10:00',
+        petsAllowed: false,
+        organizer: 'Art World'
+    },
+    {
+        id: 5,
+        category: 'Technology',
+        title: 'Tech Conference',
+        description: 'Conference on the latest in technology',
+        location: 'Convention Center',
+        date: '2022-02-05',
+        time: '09:00',
+        petsAllowed: false,
+        organizer: 'Tech Innovators'
+    },
+    {
+        id: 6,
+        category: 'Health',
+        title: 'Yoga Class',
+        description: 'Morning yoga class in the park',
+        location: 'Central Park',
+        date: '2022-02-06',
+        time: '07:00',
+        petsAllowed: true,
+        organizer: 'Yoga Studio'
+    },
+    {
+        id: 7,
+        category: 'Education',
+        title: 'Coding Workshop',
+        description: 'Workshop on web development',
+        location: 'Tech Hub',
+        date: '2022-02-07',
+        time: '14:00',
+        petsAllowed: false,
+        organizer: 'Code Academy'
+    },
+    {
+        id: 8,
+        category: 'Film',
+        title: 'Film Screening',
+        description: 'Screening of an independent film',
+        location: 'Movie Theater',
+        date: '2022-02-08',
+        time: '18:00',
+        petsAllowed: false,
+        organizer: 'Film Society'
+    }
+];
+
+app.get("/events", (req, res) => {
+    res.json(events);
+  });
   
