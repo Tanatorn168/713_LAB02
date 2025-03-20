@@ -20,7 +20,7 @@ interface Event {
     organizer: string;
 }
 
-const events: Event[] = [
+const events = [
     {
         id: 1,
         category: 'Music',
