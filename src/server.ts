@@ -108,6 +108,17 @@ const events = [
         time: '18:00',
         petsAllowed: false,
         organizer: 'Film Society'
+    },
+    {
+        
+        "category": "Literature",
+        "title": "Book Fair",
+        "description": "Annual book fair with various authors",
+        "location": "Library",
+        "date": "2022-02-09",
+        "time": "10:00",
+        "petsAllowed": true,
+        "organizer": "Book Club"
     }
 ];
 
@@ -134,4 +145,14 @@ app.get("/events/:id", (req, res) => {
         res.status(404).send("Event not found");
     }
 });
+
+//เพิ่มฐานข้อมูล
+app.post ("/events", (req,res) => {
+    const newEvent : Event = req.body;
+    newEvent.id = events.length + 1;
+    events.push(newEvent);
+    res.json(newEvent);
+});
+
+app.use(express.json())
   
