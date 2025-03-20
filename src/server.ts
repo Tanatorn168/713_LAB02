@@ -8,11 +8,6 @@ app.get('/test', (req: Request, res: Response) => {
     res.send(output);
 })
 
-   
-app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`)
-})
-
 interface Event {
     id: number;
     category: string;
@@ -116,7 +111,27 @@ const events: Event[] = [
     }
 ];
 
+app.listen(port, () => {
+    console.log(`App listening at http://localhost:${port}`)
+})
+
 app.get("/events", (req, res) => {
+    if (req.query.category) {
+    const category = req.query.category;
+    const filteredEvents = events.filter((event) => event.category === category);
+    res.json(filteredEvents);
+    } else {
     res.json(events);
-  });
+    }
+});
+
+app.get("/events/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const event = events.find((event) => event.id === id);
+    if (event) {
+        res.json(event);
+    } else {
+        res.status(404).send("Event not found");
+    }
+});
   
