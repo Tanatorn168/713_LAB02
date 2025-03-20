@@ -110,35 +110,53 @@ const events = [
         organizer: 'Film Society'
     },
     {
-        
-        "category": "Literature",
-        "title": "Book Fair",
-        "description": "Annual book fair with various authors",
-        "location": "Library",
-        "date": "2022-02-09",
-        "time": "10:00",
-        "petsAllowed": true,
-        "organizer": "Book Club"
+        id: 9,
+        category: "Literature",
+        title: "Book Fair",
+        description: "Annual book fair with various authors",
+        location: "Library",
+        date: "2022-02-09",
+        time: "10:00",
+        petsAllowed: true,
+        organizer: "Book Club"
     }
 ];
 
-app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`)
-})
+function getEventByCategory(category: string): Event[] {
+    const filteredEvents = events.filter((event) => event.category === category);
+    return filteredEvents;
+}
+
+function getAllEvents(): Event[] {
+    return events;
+}
+
+function getEventById(id: number): Event | undefined {
+    return events.find((event) => event.id === id);
+}
+
+function addEvent(newEvent: Event): Event {
+    newEvent.id = events.length + 1;
+    events.push(newEvent);
+    return newEvent;
+}
 
 app.get("/events", (req, res) => {
     if (req.query.category) {
-    const category = req.query.category;
-    const filteredEvents = events.filter((event) => event.category === category);
-    res.json(filteredEvents);
+        const category = req.query.category;
+        //const filteredEvents = events.filter((event) => event.category === category);
+        const filteredEvents = getEventByCategory(category as string);
+        res.json(filteredEvents);
     } else {
-    res.json(events);
+        //res.json(events);
+        res.json(getAllEvents());
     }
 });
 
 app.get("/events/:id", (req, res) => {
     const id = parseInt(req.params.id);
-    const event = events.find((event) => event.id === id);
+    //const event = events.find((event) => event.id === id);
+    const event = getEventById(id);
     if (event) {
         res.json(event);
     } else {
@@ -146,13 +164,19 @@ app.get("/events/:id", (req, res) => {
     }
 });
 
+app.listen(port, () => {
+    console.log(`App listening at http://localhost:${port}`)
+})
+
 //เพิ่มฐานข้อมูล
-app.post ("/events", (req,res) => {
-    const newEvent : Event = req.body;
-    newEvent.id = events.length + 1;
-    events.push(newEvent);
+//app.post("/events", (req, res) => {
+//    console.log(req.body);
+app.post("/events", (req, res) => {       
+    const newEvent: Event = req.body;
+    //newEvent.id = events.length + 1;
+    //events.push(newEvent);
+    addEvent(newEvent);
     res.json(newEvent);
 });
 
 app.use(express.json())
-  
