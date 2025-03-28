@@ -1,4 +1,4 @@
-import { s3Client } from '../awsConfig';
+import s3Client from '../awsConfig';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { randomBytes } from 'crypto';
 
@@ -21,7 +21,7 @@ export async function uploadFile(bucket: string, filePath: string, file: Express
       try {
         const data = await s3Client.send(new PutObjectCommand(params));
         console.log('File uploaded successfully:', data);
-        const publicUrl = `https://pedfrqbprruahqnceswe.supabase.co/storage/v1/object/public/images//Screenshot%202025-03-15%20171603.png`;
+        const publicUrl = `${process.env.SUPABASE_OUTPUT_URL}/${saltedFilePath}`;
         console.log('File uploaded successfully:', publicUrl);
         return publicUrl;
 

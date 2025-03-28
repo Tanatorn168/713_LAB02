@@ -4,7 +4,10 @@ import type { Event } from "./model/Event";
 import { getEventById } from "./repository/EventRepository";
 import add from "./function";
 import multer from 'multer';
+import dotenv from 'dotenv';
+dotenv.config();
 import { uploadFile } from './services/UploadFileService';
+
 
 const app = express();
 app.use(express.json());
@@ -47,7 +50,7 @@ app.listen(port, () => {
 //app.post("/events", (req, res) => {
 app.post("/events", async (req, res) => {       
     const newEvent: Event = req.body;
-    //newEvent.id = events.length + 1;
+    //newEvent.id = events.length  1;
     //events.push(newEvent);
     //addEvent(newEvent);
    await addEvent(newEvent);
@@ -62,10 +65,20 @@ app.post('/upload', upload.single('file'), async (req: any, res: any) => {
         if (!file) {
             return res.status(400).send('No file uploaded.');
         }
-        const bucket = 'images';
-        const filePath = `uploads`;
+        const bucket = process.env.SUPABASE_BUCKET_NAME;
 
+        const filePath = process.env.UPLOAD_DIR;
+
+
+        if (!bucket || !filePath) {
+            return res.status(500).send('Bucket name or file path not configured.');
+        }
         const ouputUrl = await uploadFile(bucket, filePath, file);
+
+        if (!bucket || !filePath) {
+                  return res.status(500).send('Bucket name or file path not configured.');
+                }
+            
 
         res.status(200).send(ouputUrl);
     }
